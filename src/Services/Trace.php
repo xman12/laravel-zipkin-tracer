@@ -7,7 +7,7 @@ class Trace
     /**
      * @param array<int, TraceObject> $frames
      */
-    public function __construct(private array $frames, private string $basePath, private string $vendorPath)
+    public function __construct(private readonly array $frames)
     {
     }
 
@@ -20,11 +20,11 @@ class Trace
         $basePath = static::resolveBasePath();
         $vendorPath = static::resolveVendorPath();
 
-        return new static(array_map(function ($frame, $index) use ($basePath, $vendorPath, $trace) {
+        return new static(array_map(static function ($frame, $index) use ($basePath, $vendorPath, $trace) {
             return new TraceObject(
                 static::fixFrame($frame, $trace, $index), $basePath, $vendorPath
             );
-        }, $trace, array_keys($trace)), $basePath, $vendorPath);
+        }, $trace, array_keys($trace)));
     }
 
     protected static function resolveBasePath(): string
@@ -51,9 +51,6 @@ class Trace
         return $frame;
     }
 
-    /**
-     * @return TraceObject|null
-     */
     public function resolveExecuteFile(): ?TraceObject
     {
         $appPath = app_path();
