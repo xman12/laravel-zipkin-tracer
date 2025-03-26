@@ -21,8 +21,11 @@ class EloquentSourceManagerData
      */
     public function addQuery(QueryExecuted $event): void
     {
-        $trace = StackTrace::getFromDebugBackTrace();
+        $trace = Trace::getFromDebugBackTrace();
         $executeFile = $trace->resolveExecuteFile();
+        if (null === $executeFile) {
+            return;
+        }
 
         $queryDTO = new DBQueryDTO(
             $this->createRawQuery($event->sql, $event->bindings, $event->connectionName),
@@ -54,6 +57,9 @@ class EloquentSourceManagerData
         }
         $trace = Trace::getFromDebugBackTrace();
         $executeFile = $trace->resolveExecuteFile();
+        if (null === $executeFile) {
+            return;
+        }
 
         $queryDTO = new DBQueryDTO(
             $type,
