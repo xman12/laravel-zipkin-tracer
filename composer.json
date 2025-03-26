@@ -11,6 +11,7 @@
     }
   ],
   "require": {
+    "openzipkin/zipkin": "^3.2"
   },
   "autoload": {
     "psr-4": {
