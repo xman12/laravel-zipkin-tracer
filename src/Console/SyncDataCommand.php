@@ -161,7 +161,7 @@ class SyncDataCommand extends Command
 
         if (null !== $customSpan->getChildSpans()) {
             foreach ($customSpan->getChildSpans() as $childCustomSpan) {
-                $this->processRecurciveCustormSpan($tracer, $childCustomSpan, $childSpan->getContext());
+                $this->processRecursiveCustomSpan($tracer, $childCustomSpan, $childSpan->getContext());
             }
         }
     }
