@@ -48,6 +48,7 @@ class SyncDataCommand extends Command
                 }
 
                 $this->sendData($httpData, $queries, $httpClientData, $customSpans);
+                $this->info(sprintf('File %s processed', $filePath));
                 unlink($filePath);
             }
             closedir($handle);
