@@ -2,17 +2,16 @@
 
 namespace ZipkinTracer\Providers;
 
+use Illuminate\Contracts\Http\Kernel;
 use Illuminate\Support\ServiceProvider;
-use Symfony\Component\HttpKernel\DataCollector\DataCollector;
 use ZipkinTracer\Console\SyncDataCommand;
-use ZipkinTracer\Middleware\ZipkinTracerMiddlerware;
+use ZipkinTracer\Middleware\ZipkinTracerMiddleware;
 use ZipkinTracer\Services\CustomSpanService;
 use ZipkinTracer\Services\DataCollectorService;
 use ZipkinTracer\Services\EloquentSourceManagerData;
 use ZipkinTracer\Services\EventSubscriber;
 use ZipkinTracer\Services\HttpClientManagerData;
 use ZipkinTracer\Services\HttpRequestManagerData;
-use ZipkinTracer\Services\RequestCollector;
 
 class ZipkinTracerProvider extends ServiceProvider
 {
@@ -50,11 +49,11 @@ class ZipkinTracerProvider extends ServiceProvider
     // Register middleware
     protected function registerMiddleware()
     {
-        $kernel = $this->app[\Illuminate\Contracts\Http\Kernel::class];
+        $kernel = $this->app[Kernel::class];
 
-        if (method_exists($kernel, 'hasMiddleware') && $kernel->hasMiddleware(ZipkinTracerMiddlerware::class)) return;
+        if (method_exists($kernel, 'hasMiddleware') && $kernel->hasMiddleware(ZipkinTracerMiddleware::class)) return;
 
-        $kernel->prependMiddleware(ZipkinTracerMiddlerware::class);
+        $kernel->prependMiddleware(ZipkinTracerMiddleware::class);
     }
 
     protected function registerServices()
@@ -109,7 +108,7 @@ class ZipkinTracerProvider extends ServiceProvider
 
     private function getConfig($key, $default = null)
     {
-        return $this->app['config']->get("zipkin-tracer.{$key}", $default);
+        return $this->app['config']->get("zipkin-tracer.$key", $default);
     }
 
     public function provides()

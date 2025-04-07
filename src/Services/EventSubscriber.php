@@ -3,12 +3,7 @@
 namespace ZipkinTracer\Services;
 
 use Illuminate\Contracts\Events\Dispatcher as EventDispatcher;
-use Illuminate\Database\ConnectionResolverInterface;
-use Illuminate\Database\Events\TransactionBeginning;
-use Illuminate\Database\Events\TransactionCommitted;
-use Illuminate\Database\Events\TransactionRolledBack;
-use Illuminate\Database\Events\QueryExecuted;
-use Illuminate\Http\Request;
+use Illuminate\Database\Events\{TransactionBeginning, TransactionCommitted, TransactionRolledBack, QueryExecuted};
 use Illuminate\Http\Client\Events\{ConnectionFailed, RequestSending, ResponseReceived};
 
 class EventSubscriber
@@ -16,7 +11,7 @@ class EventSubscriber
     public function __construct(
         private EventDispatcher           $eventDispatcher,
         private EloquentSourceManagerData $eloquentSourceManagerData,
-        private HttpClientManagerData $httpClientManagerData,
+        private HttpClientManagerData     $httpClientManagerData,
     )
     {
     }

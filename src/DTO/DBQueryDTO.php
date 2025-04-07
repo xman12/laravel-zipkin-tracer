@@ -2,7 +2,7 @@
 
 namespace ZipkinTracer\DTO;
 
-class DBQueryDTO
+readonly class DBQueryDTO
 {
     public function __construct(
         private string $query,

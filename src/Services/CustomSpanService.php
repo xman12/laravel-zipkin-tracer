@@ -19,6 +19,7 @@ class CustomSpanService
      * @param string $name
      * @param \Closure $callback
      * @param array<int, CustomSpansDTO>|null $childSpans
+     * @return CustomSpansDTO
      */
     public function createSpan(string $name, \Closure $callback, ?array $childSpans = null): CustomSpansDTO
     {

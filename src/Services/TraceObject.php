@@ -15,7 +15,7 @@ class TraceObject
     private ?string $shortPath;
     private ?string $vendor;
 
-    public function __construct(array $data = [], $basePath = '', $vendorPath = '')
+    public function __construct(array $data = [], string $basePath = '', string $vendorPath = '')
     {
         $this->setParams($data);
         $this->call = null !== $this->class ? "$this->class$this->type$this->function()" : "$this->function()";
@@ -31,26 +31,17 @@ class TraceObject
         }
     }
 
-    /**
-     * @return array
-     */
     public function getArgs(): array
     {
         return $this->args;
     }
 
-    /**
-     * @return string|null
-     */
     public function getCall(): ?string
     {
         return $this->call;
     }
 
-    /**
-     * @return string
-     */
-    public function getClass(): string
+    public function getClass(): ?string
     {
         return $this->class;
     }

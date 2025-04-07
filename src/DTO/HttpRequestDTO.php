@@ -5,14 +5,14 @@ namespace ZipkinTracer\DTO;
 class HttpRequestDTO
 {
     public function __construct(
-        private string $method,
-        private string $url,
-        private array $headers,
-        private string $body,
-        private string $content,
-        private float $startTime,
-        private float $durationTime,
-        private ?string $error = null,
+        private readonly string  $method,
+        private readonly string  $url,
+        private readonly array   $headers,
+        private readonly string  $body,
+        private readonly string  $content,
+        private readonly float   $startTime,
+        private float            $durationTime,
+        private ?string          $error = null,
         private ?HttpResponseDTO $response = null,
     )
     {
@@ -95,7 +95,7 @@ class HttpRequestDTO
             'startTime' => $this->startTime,
             'durationTime' => $this->durationTime,
             'error' => $this->error,
-            'response' => null !== $this->response ? $this->response->toArray() : null,
+            'response' => $this->response?->toArray(),
         ];
     }
 

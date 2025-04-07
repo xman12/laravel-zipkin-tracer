@@ -1,12 +1,14 @@
 {
   "name": "xman12/laravel-zipkin-tracer",
-  "description": "description",
+  "description": "The tracing for Zipkin for your application based on Laravel",
   "minimum-stability": "stable",
-  "license": "proprietary",
+  "keywords": ["zinkin", "laravel-zipkin"],
+  "license": "Apache 2.0",
+  "homepage": "https://github.com/xman12/laravel-zipkin-tracer",
   "type": "library",
   "authors": [
     {
-      "name": "xman12",
+      "name": "Aleksandr Belyshev",
       "email": "xman12@mail.ru"
     }
   ],

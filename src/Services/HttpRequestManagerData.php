@@ -2,7 +2,6 @@
 
 namespace ZipkinTracer\Services;
 
-use Illuminate\Http\Client\Events\{ConnectionFailed, RequestSending, ResponseReceived};
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Http\Request;
 use ZipkinTracer\Exceptions\BaseException;

@@ -38,9 +38,9 @@ class HttpClientManagerData
 
         $httpResponseDTO = new HttpResponseDTO(
             statusCode: $event->response->status(),
-            content: $event->response->json(),
+            headers: $event->response->headers(),
             body: $event->response->body(),
-            headers: $event->response->headers()
+            content: $event->response->json()
         );
         $httpRequestDTO->setDuration(microtime(true) - $httpRequestDTO->getStartTime());
         $httpRequestDTO->setResponse($httpResponseDTO);

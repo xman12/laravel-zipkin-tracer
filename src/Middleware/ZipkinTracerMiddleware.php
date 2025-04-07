@@ -12,7 +12,7 @@ use ZipkinTracer\Exceptions\BaseException;
 use Zipkin\TracingBuilder;
 use ZipkinTracer\Services\{DataCollectorService, EloquentSourceManagerData, HttpRequestManagerData};
 
-class ZipkinTracerMiddlerware
+class ZipkinTracerMiddleware
 {
     public function __construct(protected Application $app)
     {

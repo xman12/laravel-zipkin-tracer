@@ -4,7 +4,7 @@ namespace ZipkinTracer\DTO;
 
 use ZipkinTracer\Exceptions\BaseException;
 
-class RequestDTO
+readonly class RequestDTO
 {
     /**
      * @param string $requestId
@@ -14,29 +14,31 @@ class RequestDTO
      * @param array $cookies
      * @param array $query
      * @param resource|string|null $content
+     * @param float $startTimestamp
+     * @param float $time
+     * @param int $statusCode
+     * @param int $requestSize
+     * @param int $responseSize
+     * @param string|null $routeName
+     * @param BaseException|null $exception
      */
     public function __construct(
-        private string  $requestId,
-        private string  $method,
-        private string  $url,
-        private array   $headers,
-        private array   $cookies,
-        private array   $query,
-        private         $content,
-        private float   $startTimestamp,
-        private float   $time,
-        private int     $statusCode,
-        private int $requestSize,
-        private int $responseSize,
-        private ?string $routeName = null,
-        private ?BaseException  $exception = null,
+        private string         $requestId,
+        private string         $method,
+        private string         $url,
+        private array          $headers,
+        private array          $cookies,
+        private array          $query,
+        private mixed          $content,
+        private float          $startTimestamp,
+        private float          $time,
+        private int            $statusCode,
+        private int            $requestSize,
+        private int            $responseSize,
+        private ?string        $routeName = null,
+        private ?BaseException $exception = null,
     )
     {
-    }
-
-    public function getBody(): array
-    {
-        return $this->body;
     }
 
     /**
@@ -151,7 +153,7 @@ class RequestDTO
             'request_size' => $this->requestSize,
             'response_size' => $this->responseSize,
             'route_name' => $this->routeName,
-            'exception' => null !== $this->exception ? $this->exception->toArray() : null,
+            'exception' => $this->exception?->toArray(),
         ];
     }
 

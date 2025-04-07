@@ -2,7 +2,7 @@
 
 namespace ZipkinTracer\DTO;
 
-class HttpResponseDTO
+readonly class HttpResponseDTO
 {
     public function __construct(
         private int $statusCode,

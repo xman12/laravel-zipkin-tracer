@@ -2,12 +2,12 @@
 
 namespace ZipkinTracer\Services;
 
-class Trace
+readonly class Trace
 {
     /**
      * @param array<int, TraceObject> $frames
      */
-    public function __construct(private readonly array $frames)
+    public function __construct(private array $frames)
     {
     }
 
@@ -55,7 +55,13 @@ class Trace
     {
         $appPath = app_path();
         foreach ($this->frames as $frame) {
-            if (preg_match('#' . $appPath . '(.*)#', $frame->getShortPath())) {
+            if (
+                preg_match('#' . $appPath . '(.*)#', $frame->getShortPath())
+                || preg_match('#' . $appPath . '(.*)#', $frame->getFile())
+                || 'createSpan' === $frame->getFunction()
+                || 'Illuminate\Support\Facades\Facade' === $frame->getClass()
+                || '/vendor/laravel/framework/src/Illuminate/Session/Store.php' === $frame->getShortPath()
+            ) {
                 return $frame;
             }
         }

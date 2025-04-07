@@ -4,13 +4,15 @@ namespace ZipkinTracer\DTO;
 
 use ZipkinTracer\Exceptions\BaseException;
 
-class CustomSpansDTO
+readonly class CustomSpansDTO
 {
     /**
      * @param string $name
      * @param array<string, string> $tagsWithResult
      * @param float $startTime
      * @param float $durationTime
+     * @param string $executeFile
+     * @param int $executeFileLine
      * @param BaseException|null $exception
      * @param array<int, CustomSpansDTO> $childSpans
      */
@@ -43,7 +45,7 @@ class CustomSpansDTO
             'duration_time' => $this->durationTime,
             'execute_file' => $this->executeFile,
             'execute_file_line' => $this->executeFileLine,
-            'exception' => null !== $this->exception ? $this->exception->toArray() : null,
+            'exception' => $this->exception?->toArray(),
             'child_spans' => count($childrenSpans) > 0 ? $childrenSpans : null,
         ];
     }

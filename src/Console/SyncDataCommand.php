@@ -15,7 +15,7 @@ use Zipkin\Tracer;
 class SyncDataCommand extends Command
 {
     protected $signature = 'zipkin-tracer:sync_data';
-    protected $description = '';
+    protected $description = 'Synchronize data to Zipkin';
 
     /**
      * Execute the console command.
@@ -135,14 +135,14 @@ class SyncDataCommand extends Command
 
         // process custom spans
         foreach ($customSpans as $customSpan) {
-            $this->processRecurciveCustormSpan($tracer, $customSpan, $span->getContext());
+            $this->processRecursiveCustomSpan($tracer, $customSpan, $span->getContext());
         }
 
         $span->finish(($startTime + $httpData->getTime()) * 1000 * 1000);
         $tracer->flush();
     }
 
-    private function processRecurciveCustormSpan(Tracer $tracer, CustomSpansDTO $customSpan, TraceContext $context)
+    private function processRecursiveCustomSpan(Tracer $tracer, CustomSpansDTO $customSpan, TraceContext $context): void
     {
         $filePath = str_replace(app_path(), '', $customSpan->getExecuteFile());
         $spanName = sprintf('%s: %s -> %d', $customSpan->getName(), $filePath, $customSpan->getExecuteFileLine());
@@ -166,8 +166,8 @@ class SyncDataCommand extends Command
         }
     }
 
-    private function getConfig($key, $default = null)
+    private function getConfig($key)
     {
-        return app()['config']->get("zipkin-tracer.{$key}", $default);
+        return app()['config']->get("zipkin-tracer.$key", null);
     }
 }
