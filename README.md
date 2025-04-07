@@ -24,15 +24,14 @@ return [
 ```
 
 after that you need to add command `zipkin-tracer:sync_data` to cronjob
-how often to call the command you decide yourself
+how often to call the command you decide yourself.
+
+ZipkinTracer command collect all metric data
+from files prepares them and sending to zipkin server
 
 ## Schema collect metric data 
 
 ![workflow](workflow.png)
 
-## Sending metric data to Zipkin server
-
-ZipkinTracer command collect all metric data
-from files prepares them and sending to zipkin server 
-
+## Notice
 For sending metric data we use `openzipkin/zipkin` library
