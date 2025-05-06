@@ -2,7 +2,7 @@
   "name": "xman12/laravel-zipkin-tracer",
   "description": "The tracing for Zipkin for your application based on Laravel",
   "minimum-stability": "stable",
-  "keywords": ["zinkin", "laravel-zipkin"],
+  "keywords": ["zipkin", "laravel-zipkin"],
   "license": "Apache 2.0",
   "homepage": "https://github.com/xman12/laravel-zipkin-tracer",
   "type": "library",
