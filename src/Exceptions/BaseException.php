@@ -5,8 +5,8 @@ namespace ZipkinTracer\Exceptions;
 class BaseException extends \Exception
 {
     public function __construct(
-        string $message = "",
-        int $code = 0,
+        $message = "",
+        $code = 0,
         string $file,
         int $line,
         ?Throwable $previous = null)

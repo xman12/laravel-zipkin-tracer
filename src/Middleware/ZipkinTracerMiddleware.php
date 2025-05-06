@@ -33,10 +33,12 @@ class ZipkinTracerMiddleware
             $response = $this->app[ExceptionHandler::class]->render($request, $e);
         }
 
-        if (null !== $response->exception) {
+        if (isset($response->exception) && null !== $response->exception) {
+            $code = is_int($response->exception->getCode()) ? $response->exception->getCode() : 500;
+
             $baseException = new BaseException(
                 $response->exception->getMessage(),
-                $response->exception->getCode(),
+                $code,
                 $response->exception->getFile(),
                 $response->exception->getLine()
             );
