@@ -1,6 +1,11 @@
 # Easy Zipkin tracer for Laravel
 
 The tracing for Zipkin for your application based on Laravel
+Auto tracing supported for:
+- Database(queries, transactions)
+- Http requests (Laravel http library)
+
+You can also create "custom" span
 
 ## Getting Started
 `composer require xman12/laravel-zipkin-tracer`
