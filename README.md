@@ -6,19 +6,6 @@
 
 A specialized Laravel module that provides automatic tracing for HTTP requests, SQL queries, and custom spans with seamless Zipkin integration.
 
-## 📋 Table of Contents
-
-- [Overview](#overview)
-- [Features](#features)
-- [Architecture](#architecture)
-- [Installation](#installation)
-- [Configuration](#configuration)
-- [Usage](#usage)
-- [Examples](#examples)
-- [Comparison with OpenTelemetry](#comparison-with-opentelemetry)
-- [Monitoring & Debugging](#monitoring--debugging)
-- [License](#license)
-
 ## 🎯 Overview
 
 In modern microservice application development, it's crucial to have the ability to track request execution across various services. Distributed tracing allows developers to understand how requests flow through the system, identify bottlenecks, and diagnose performance issues.
@@ -49,6 +36,11 @@ In modern microservice application development, it's crucial to have the ability
 ### System Architecture
 
 ![system_architecture.png](system_architecture.png)
+
+
+### Storage Architecture
+
+![storage_architecture.png](storage_architecture.png)
 
 ### Data Collection Flow
 
@@ -383,54 +375,6 @@ In Zipkin you can see:
 2. **External API Errors**: Review HTTP client requests
 3. **Business Logic Issues**: Analyze custom spans
 4. **Performance Issues**: Identify bottlenecks in request chains
-
-### Storage Architecture
-
-![storage_architecture.png](storage_architecture.png)
-
-## 🛠️ Development
-
-### Project Structure
-
-```
-src/
-├── config/
-│   └── zipkin-tracer.php
-├── Console/
-│   └── SyncDataCommand.php
-├── DTO/
-│   ├── CustomSpansDTO.php
-│   ├── DBQueryDTO.php
-│   ├── HttpRequestDTO.php
-│   ├── HttpResponseDTO.php
-│   └── RequestDTO.php
-├── Enums/
-│   └── Tags.php
-├── Exceptions/
-│   └── BaseException.php
-├── Middleware/
-│   └── ZipkinTracerMiddleware.php
-├── Providers/
-│   └── ZipkinTracerProvider.php
-└── Services/
-    ├── CustomSpanService.php
-    ├── DataCollectorService.php
-    ├── EloquentSourceManagerData.php
-    ├── EventSubscriber.php
-    ├── HttpClientManagerData.php
-    ├── HttpRequestManagerData.php
-    ├── Trace.php
-    └── TraceObject.php
-```
-
-### Key Components
-
-- **ZipkinTracerProvider**: Main service provider
-- **ZipkinTracerMiddleware**: HTTP request interception
-- **EventSubscriber**: Laravel event listening
-- **DataCollectorService**: Data collection and storage
-- **CustomSpanService**: Custom span creation
-- **SyncDataCommand**: Data synchronization with Zipkin
 
 ## 📄 License
 
